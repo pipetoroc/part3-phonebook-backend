@@ -65,9 +65,16 @@ app.post('/api/persons', (request, response) => {
     const id = Math.floor(Math.random() * 100)
     const body = request.body
 
-    if (!body.name) {
+    if (!body.name || !body.number) {
         return response.status(400).json({
-            error: 'Name missing'
+            error: 'Name and number mustn\´t be blank'
+        })
+    }
+
+    const nameExisted = persons.find(person => person.name.toLowerCase === body.name.toLowerCase)
+    if (nameExisted) {
+        return response.status(400).json({
+            error: 'name must be unique'
         })
     }
 
