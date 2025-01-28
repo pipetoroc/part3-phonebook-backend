@@ -74,7 +74,8 @@ app.post('/api/persons', (request, response) => {
         })
     }
 
-    const nameExisted = persons.find(person => person.name.toLowerCase === body.name.toLowerCase)
+    const nameExisted = persons.find(person => person.name.toLowerCase() === body.name.toLowerCase())
+    console.log(nameExisted)
     if (nameExisted) {
         return response.status(400).json({
             error: 'name must be unique'
@@ -82,12 +83,13 @@ app.post('/api/persons', (request, response) => {
     }
 
     const person = {
+        id: id.toString(),
         name: body.name,
-        number: Number(body.number),
-        id
+        number: body.number
     }
 
     persons = persons.concat(person)
+    console.log(person)
     response.json(person)
 })
 
