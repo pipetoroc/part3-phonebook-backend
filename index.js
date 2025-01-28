@@ -1,8 +1,8 @@
 const express = require('express')
 const app = express()
-const PORT = 3001
 
-app.use(express.json())
+const morgan = require('morgan')
+const PORT = 3001
 
 let persons = [
     {
@@ -26,6 +26,9 @@ let persons = [
         "number": "39-23-6423122"
     }
 ]
+
+app.use(express.json())
+app.use(morgan('tiny'))
 
 const numberOfPeople = persons.length
 
