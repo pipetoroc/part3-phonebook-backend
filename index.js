@@ -102,7 +102,10 @@ app.post('/api/persons', (request, response, next) => {
     newPerson.save().then(savedPerson => {
         response.json(savedPerson)
     })
-        .catch(error => next(error))
+        .catch(error => {
+            console.log(error)
+            next(error)
+        })
 })
 
 const errorHandler = (error, request, response, next) => {
