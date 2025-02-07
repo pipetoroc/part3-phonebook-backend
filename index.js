@@ -5,6 +5,7 @@ const Person = require('./models/mongoose')
 
 const morgan = require('morgan')
 const cors = require('cors')
+const mongoose = require('./models/mongoose')
 
 let persons = [
     {
@@ -36,12 +37,12 @@ app.use(express.static('dist'))
 morgan.token('body', (req) => JSON.stringify(req.body))
 app.use(morgan(':method :url :status :response-time ms :body'))
 
-const numberOfPeople = persons.length
-
 //info app
-app.get('/info', (request, response) => {
-    response.send(`<p>Phonebook has info for ${numberOfPeople}</p> 
-    ${new Date().toString()}`)
+app.get('/info', (request, response, next) => {
+    Person.countDocuments({}).then(count => {
+        response.send(`<p>Phonebook has info for ${count}</p> 
+        ${new Date().toString()}`)
+    }).catch(error => next(error))
 })
 
 //all entries request
