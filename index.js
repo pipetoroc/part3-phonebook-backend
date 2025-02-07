@@ -71,6 +71,16 @@ app.delete('/api/persons/:id', (request, response) => {
     })
 })
 
+app.put('/api/persons/:id', (request, response, next) => {
+
+    const { name, number } = request.body
+
+    Person.findOneAndUpdate({ name: name }, { number: number }, { new: true })
+        .then(personUpdated => {
+            response.json(personUpdated)
+        })
+})
+
 
 app.post('/api/persons', (request, response) => {
 
