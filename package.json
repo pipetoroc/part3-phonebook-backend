@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "node --watch index.js",
-    "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
@@ -28,5 +27,14 @@
     "express": "^4.21.2",
     "mongoose": "^8.9.6",
     "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "standard": "^17.1.2"
+  },
+  "eslintConfig": {
+    "extends": "./node_modules/standard/eslintrc.json",
+    "rules": {
+      "eslint-plugin-import/no-absolute-path": "off"
+    }
   }
 }
